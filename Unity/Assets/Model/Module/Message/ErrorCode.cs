@@ -39,6 +39,10 @@ namespace ETModel
 		
 		public const int ERR_AccountOrPasswordError = 200102;
 		public const int ERR_ActorLocationNotFound = 200103;
+		public const int ERR_AccountAlreadyExist = 200104;
+		public const int ERR_UserAlreadyExist = 200104;
+		public const int ERR_PlayerAlreadyCreated = 200105;
+		public const int ERR_UserNotOnline = 200106;
 		//-----------------------------------
 		public static bool IsRpcNeedThrowException(int error)
 		{
@@ -51,6 +55,7 @@ namespace ETModel
 			{
 				return false;
 			}
+			Log.Info("error" + error);
 
 			return true;
 		}

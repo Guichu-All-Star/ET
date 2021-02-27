@@ -115,7 +115,7 @@ namespace Pathfinding {
 		public bool BeginFade () {
 			var hermite = Hermite(0, 1, value);
 
-			visible = EditorGUILayout.BeginFadeGroup(hermite);
+			// visible = EditorGUILayout.BeginFadeGroup(hermite);
 			GUIUtilityx.PushTint(new Color(1, 1, 1, hermite));
 			Tick();
 
@@ -130,12 +130,12 @@ namespace Pathfinding {
 		public void End () {
 			EditorGUILayout.EndVertical();
 
-			if (visible) {
+			// if (visible) {
 				// Some space that cannot be placed in the GUIStyle unfortunately
-				GUILayout.Space(4);
+				// GUILayout.Space(4);
 
-				EditorGUILayout.EndFadeGroup();
-			}
+				// EditorGUILayout.EndFadeGroup();
+			// }
 
 			EditorGUILayout.EndVertical();
 			GUIUtilityx.PopTint();

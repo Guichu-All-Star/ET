@@ -8,6 +8,7 @@ namespace ETHotfix
 	{
 		protected override async ETTask Run(Session session, C2R_Ping request, R2C_Ping response, Action reply)
 		{
+			Log.Debug("C2R_PingHandler session.id=" + session.InstanceId);
 			reply();
 			await ETTask.CompletedTask;
 		}

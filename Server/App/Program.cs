@@ -60,6 +60,7 @@ namespace App
 						Game.Scene.AddComponent<NetOuterComponent, string>(outerConfig.Address);
 						Game.Scene.AddComponent<LocationProxyComponent>();
 						Game.Scene.AddComponent<RealmGateAddressComponent>();
+						Game.Scene.AddComponent<OnlineComponent>();
 						break;
 					case AppType.Gate:
 						Game.Scene.AddComponent<CoroutineLockComponent>();
@@ -97,8 +98,9 @@ namespace App
 						// 发送location actor消息
 						Game.Scene.AddComponent<ActorLocationSenderComponent>();
 
-						//Game.Scene.AddComponent<DBComponent>();
-						//Game.Scene.AddComponent<DBProxyComponent>();
+						//MongoDB 数据库组件
+						Game.Scene.AddComponent<DBComponent>();
+						Game.Scene.AddComponent<DBProxyComponent>();
 
 						//协程锁组件
 						Game.Scene.AddComponent<CoroutineLockComponent>();
@@ -134,6 +136,8 @@ namespace App
 
 						Game.Scene.AddComponent<ConsoleComponent>();
 						// Game.Scene.AddComponent<HttpComponent>();
+						//在线组件
+						Game.Scene.AddComponent<OnlineComponent>();
 						break;
 					case AppType.Benchmark:
 						Game.Scene.AddComponent<CoroutineLockComponent>();
@@ -152,7 +156,6 @@ namespace App
 					default:
 						throw new Exception($"命令行参数没有设置正确的AppType: {startConfig.AppType}");
 				}
-				
 				while (true)
 				{
 					try

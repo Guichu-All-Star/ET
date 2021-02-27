@@ -5,62 +5,78 @@ using MongoDB.Bson.Serialization.Options;
 
 namespace ETModel
 {
-	public class UnitComponent: Component
-	{
-		[BsonElement]
-		[BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
-		private readonly Dictionary<long, Unit> idUnits = new Dictionary<long, Unit>();
 
-		public override void Dispose()
-		{
-			if (this.IsDisposed)
-			{
-				return;
-			}
-			base.Dispose();
+    [ObjectSystem]
+    public class UnitComponentUpdateSystem : UpdateSystem<UnitComponent>
+    {
+        public override void Update(UnitComponent self)
+        {
+            self.Update();
+        }
+    }
+    public class UnitComponent : Component
+    {
+        [BsonElement]
+        [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
+        private readonly Dictionary<long, Unit> idUnits = new Dictionary<long, Unit>();
 
-			foreach (Unit unit in this.idUnits.Values)
-			{
-				unit.Dispose();
-			}
-			this.idUnits.Clear();
-		}
+        public override void Dispose()
+        {
+            if (this.IsDisposed)
+            {
+                return;
+            }
+            base.Dispose();
 
-		public void Add(Unit unit)
-		{
-			this.idUnits.Add(unit.Id, unit);
-		}
+            foreach (Unit unit in this.idUnits.Values)
+            {
+                unit.Dispose();
+            }
+            idUnits.Clear();
+        }
 
-		public Unit Get(long id)
-		{
-			this.idUnits.TryGetValue(id, out Unit unit);
-			return unit;
-		}
+        public void Add(Unit unit)
+        {
+            idUnits.Add(unit.Id, unit);
+        }
 
-		public void Remove(long id)
-		{
-			Unit unit;
-			this.idUnits.TryGetValue(id, out unit);
-			this.idUnits.Remove(id);
-			unit?.Dispose();
-		}
+        public Unit Get(long id)
+        {
+            idUnits.TryGetValue(id, out Unit unit);
+            return unit;
+        }
 
-		public void RemoveNoDispose(long id)
-		{
-			this.idUnits.Remove(id);
-		}
+        public void Remove(long id)
+        {
+            Unit unit;
+            if (idUnits.TryGetValue(id, out unit))
+            {
+                idUnits.Remove(id);
+                unit.Dispose();
+            }
+        }
 
-		public int Count
-		{
-			get
-			{
-				return this.idUnits.Count;
-			}
-		}
+        public void RemoveNoDispose(long id)
+        {
+            idUnits.Remove(id);
+        }
 
-		public Unit[] GetAll()
-		{
-			return this.idUnits.Values.ToArray();
-		}
-	}
+        public int Count
+        {
+            get
+            {
+                return idUnits.Count;
+            }
+        }
+
+        public Unit[] GetAll()
+        {
+            return idUnits.Values.ToArray();
+        }
+
+        public void Update() 
+        {
+
+        }
+    }
 }

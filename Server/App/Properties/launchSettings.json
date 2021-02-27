@@ -3,7 +3,8 @@
     "Server.App": {
       "commandName": "Project",
       "commandLineArgs": "--appId=1 --appType=AllServer --config=../Config/StartConfig/LocalAllServer.txt",
-      "workingDirectory": "../../Bin"
+      "workingDirectory": "../../Bin",
+      "nativeDebugging": true
     }
   }
 }

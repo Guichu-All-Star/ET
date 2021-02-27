@@ -96,7 +96,7 @@ namespace Pathfinding.Util {
 				mesh.colors = colors;
 
 				// Upload all data and mark the mesh as unreadable
-				mesh.UploadMeshData(true);
+				// mesh.UploadMeshData(true);
 				meshes.Add(mesh);
 			}
 
@@ -210,7 +210,7 @@ namespace Pathfinding.Util {
 					mesh.SetUVs(0, uv);
 
 					// Upload all data and mark the mesh as unreadable
-					mesh.UploadMeshData(true);
+					// mesh.UploadMeshData(true);
 
 					// Release the lists back to the pool
 					ListPool<Vector3>.Release(ref vertices);

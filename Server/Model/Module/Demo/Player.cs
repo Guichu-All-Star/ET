@@ -1,33 +1,29 @@
 ﻿namespace ETModel
 {
-	[ObjectSystem]
-	public class PlayerSystem : AwakeSystem<Player, string>
-	{
-		public override void Awake(Player self, string a)
-		{
-			self.Awake(a);
-		}
-	}
+    public sealed class Player : Entity
+    {
+        public long UnitId { get; set; }
 
-	public sealed class Player : Entity
-	{
-		public string Account { get; private set; }
-		
-		public long UnitId { get; set; }
+        /// <summary>
+        /// 玩家所在的Gate服务器的AppID
+        /// </summary>
+        public int GateAppID { get; set; }
 
-		public void Awake(string account)
-		{
-			this.Account = account;
-		}
-		
-		public override void Dispose()
-		{
-			if (this.IsDisposed)
-			{
-				return;
-			}
+        /// <summary>
+        /// 玩家所绑定的Seesion.Id 用于给客户端发送消息
+        /// </summary>
+        public long GateSessionID { get; set; }
 
-			base.Dispose();
-		}
-	}
+        public override void Dispose()
+        {
+            if (this.IsDisposed)
+            {
+                return;
+            }
+
+            base.Dispose();
+            GateAppID = 0;
+            GateSessionID = 0;
+        }
+    }
 }

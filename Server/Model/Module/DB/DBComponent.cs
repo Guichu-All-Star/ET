@@ -8,6 +8,7 @@ namespace ETModel
 	{
 		public override void Awake(DBComponent self)
 		{
+			Log.Info("DbComponentSystem Awake");
 			self.Awake();
 		}
 	}
@@ -35,6 +36,7 @@ namespace ETModel
 				DBTaskQueue taskQueue = ComponentFactory.Create<DBTaskQueue>();
 				this.tasks.Add(taskQueue);
 			}
+
 		}
 		
 		public IMongoCollection<ComponentWithId> GetCollection(string name)

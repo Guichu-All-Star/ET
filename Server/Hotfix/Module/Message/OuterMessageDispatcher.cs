@@ -41,11 +41,13 @@ namespace ETHotfix
 				}
 				case IActorRequest actorRequest:  // 分发IActorRequest消息，目前没有用到，需要的自己添加
 				{
+					Log.Info($"IActorRequest Message: {message}");
 					break;
 				}
 				case IActorMessage actorMessage:  // 分发IActorMessage消息，目前没有用到，需要的自己添加
-				{
-					break;
+					{
+						Log.Info($"IActorMessage Message: {message}");
+						break;
 				}
 				default:
 				{
